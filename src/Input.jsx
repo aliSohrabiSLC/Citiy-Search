@@ -2,14 +2,14 @@
 
 import "./Index.css";
 
-const Input = ({ handleChange, hint }) => {
+const Input = ({ handleChange }) => {
   return (
     <div className="input">
       <input
         type="text"
         id="searchInput"
         onChange={handleChange}
-        placeholder="نام شهر را وارد کنید..."
+        placeholder="please enter your city"
       />
     </div>
   );

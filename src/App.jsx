@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Input from "./Input"; // فرض بر این است که Input در همین پوشه قرار دارد
+import Input from "./Input"; 
 import "./Index.css";
 const App = () => {
   const [cities, setCities] = useState([]);
@@ -7,20 +7,19 @@ const App = () => {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    // دریافت لیست شهرها از فایل cities.json
-    fetch("../public/cities.JSON")
+    
+    fetch("/cities.JSON")
       .then((response) => response.json())
       .then((data) => setCities(data))
       .catch((error) => console.error("خطا در دریافت شهرها:", error));
   }, []);
 
   const handleInputChange = (e) => {
-    const input = e.target.value;
+    const input = e.target.value.toLowerCase();
     setSearchInput(input);
 
-    // فیلتر کردن شهرها بر اساس ورودی و حساسیت به بزرگی و کوچکی حروف
     if (input) {
-      const filteredCities = cities.filter((city) =>
+      const filteredCities = cities.filter((city) => 
         city.toLowerCase().startsWith(input)
       );
       setSuggestions(filteredCities);
@@ -31,12 +30,12 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>جستجوی شهر</h1>
-      <Input handleChange={handleInputChange} hint="جستجوی شهر" />
+      <h1>City Finder</h1>
+      <Input handleChange={handleInputChange}  />
       {searchInput && (
-        <ul className="suggestions">
+        <ul >
           {suggestions.map((city, index) => (
-            <li key={index}>{city}</li>
+            <li className="suggestions" key={index}>{city}</li>
           ))}
         </ul>
       )}
